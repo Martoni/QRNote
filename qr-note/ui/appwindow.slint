@@ -1,17 +1,32 @@
 import { Button, VerticalBox } from "std-widgets.slint";
+import { HorizontalBox, TextEdit } from "std-widgets.slint";
 
 export component AppWindow inherits Window {
     in-out property<int> counter: 42;
     callback request-increase-value();
+    callback compute-qr-code();
     VerticalBox {
-        Text {
+        TextEdit {
             text: "Counter: \{root.counter}";
+            width: 300px;
+            height: 300px;
         }
         Button {
             text: "Increase value";
             clicked => {
                 root.request-increase-value();
             }
+        }
+        Button {
+            text: "Gen QRNote";
+            clicked => {
+                root.compute-qr-code();
+            }
+        }
+        Image {
+            source : @image-url("icons/QRNote.png");
+            width: 100px;
+            height: 100px;
         }
     }
 }

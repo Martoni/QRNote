@@ -7,6 +7,11 @@ fn main() -> Result<(), slint::PlatformError> {
     ui.on_request_increase_value(move || {
         let ui = ui_handle.unwrap();
         ui.set_counter(ui.get_counter() + 1);
+        println!("button pushed");
+    });
+
+    ui.on_compute_qr_code(move || {
+        println!("TODO");
     });
 
     ui.run()
