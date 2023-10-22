@@ -3,13 +3,19 @@ import { HorizontalBox, TextEdit } from "std-widgets.slint";
 
 export component AppWindow inherits Window {
     in-out property<int> counter: 42;
+    out property<string> thetext: "Pouet";
     callback request-increase-value();
     callback compute-qr-code();
+    callback qr-note-edited();
     VerticalBox {
         TextEdit {
-            text: "Counter: \{root.counter}";
+            text: thetext;
             width: 300px;
             height: 300px;
+            edited(text) => {
+                thetext = text;
+                root.qr-note-edited();
+            }
         }
         Button {
             text: "Increase value";

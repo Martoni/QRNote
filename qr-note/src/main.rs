@@ -10,8 +10,16 @@ fn main() -> Result<(), slint::PlatformError> {
         println!("button pushed");
     });
 
+    let ui_handle = ui.as_weak();
     ui.on_compute_qr_code(move || {
-        println!("TODO");
+        let ui = ui_handle.unwrap();
+        println!("{}",ui.get_thetext());
+    });
+
+    let ui_handle = ui.as_weak();
+    ui.on_qr_note_edited(move || {
+        let ui = ui_handle.unwrap();
+        println!("text changed -> {}", ui.get_thetext());
     });
 
     ui.run()
