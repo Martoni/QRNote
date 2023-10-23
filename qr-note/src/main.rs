@@ -1,6 +1,16 @@
+use qrcode::QrCode;
+use image::Luma;
 slint::include_modules!();
 
 fn main() -> Result<(), slint::PlatformError> {
+
+    let mut count = 0;
+
+    /* QrCode tests */
+    // Save the image.
+//    image.save("qrcode.png").unwrap();
+    /* end of QrCode tests */
+
     let ui = AppWindow::new()?;
 
     let ui_handle = ui.as_weak();
@@ -19,7 +29,10 @@ fn main() -> Result<(), slint::PlatformError> {
     let ui_handle = ui.as_weak();
     ui.on_qr_note_edited(move || {
         let ui = ui_handle.unwrap();
-        println!("text changed -> {}", ui.get_thetext());
+//        println!("text changed -> {}", ui.get_thetext());
+        let code = QrCode::new(ui.get_thetext()).unwrap();
+        let image = code.render::<Luma<u8>>().build();
+        image.save("qrcode.png").unwrap();
     });
 
     ui.run()

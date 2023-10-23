@@ -3,6 +3,7 @@ import { HorizontalBox, TextEdit } from "std-widgets.slint";
 
 export component AppWindow inherits Window {
     in-out property<int> counter: 42;
+    in-out property<image> qrnote: @image-url("icons/QRNote.png");
     out property<string> thetext: "Pouet";
     callback request-increase-value();
     callback compute-qr-code();
@@ -30,7 +31,7 @@ export component AppWindow inherits Window {
             }
         }
         Image {
-            source : @image-url("icons/QRNote.png");
+            source : qrnote;
             width: 100px;
             height: 100px;
         }
