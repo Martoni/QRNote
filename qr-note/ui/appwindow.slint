@@ -7,7 +7,6 @@ export component AppWindow inherits Window {
     out property<string> thetext: "Pouet";
     callback request-increase-value();
     callback compute-qr-code();
-    callback qr-note-edited();
     VerticalBox {
         TextEdit {
             text: thetext;
@@ -15,7 +14,6 @@ export component AppWindow inherits Window {
             height: 300px;
             edited(text) => {
                 thetext = text;
-                root.qr-note-edited();
             }
         }
         Button {
