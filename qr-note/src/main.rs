@@ -1,5 +1,4 @@
 use qrcode::QrCode;
-use image::Luma;
 use image::Rgb;
 use slint::SharedPixelBuffer;
 use slint::Rgb8Pixel;
