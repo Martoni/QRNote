@@ -1,31 +1,25 @@
 use qrcode::QrCode;
 use image::Luma;
-use std::path::Path;
+use image::Rgb;
+use slint::SharedPixelBuffer;
+use slint::Rgb8Pixel;
+use slint::Image;
 slint::include_modules!();
 
 fn main() -> Result<(), slint::PlatformError> {
     let ui = AppWindow::new()?;
 
     let ui_handle = ui.as_weak();
-    ui.on_request_increase_value(move || {
-        let ui = ui_handle.unwrap();
-        ui.set_counter(ui.get_counter() + 1);
-        println!("button pushed");
-    });
-    let mut count = 0;
-    let ui_handle = ui.as_weak();
-    ui.on_compute_qr_code(move || {
+    ui.on_text_is_edited(move || {
         let ui = ui_handle.unwrap();
         let code = QrCode::new(ui.get_thetext()).unwrap();
-        let image = code.render::<Luma<u8>>().build();
-//        fs::remove_file("ui/icons/qrcode.png").unwrap();
-        image.save("ui/icons/qrcode.png").unwrap();
-        use slint::Image;
-        let qrimage = Image::load_from_path(Path::new("ui/icons/qrcode.png")).unwrap();
-        ui.set_qrnote(qrimage);
-        println!("count {}", count);
-        count = count + 1;
+        let image = code.render::<Rgb<u8>>().build();
+        let pixel_buffer = SharedPixelBuffer::<Rgb8Pixel>::clone_from_slice(
+            image.as_raw(),
+            image.width(),
+            image.height());
+        ui.set_qrnote(Image::from_rgb8(pixel_buffer));
     });
-
+ 
     ui.run()
 }
