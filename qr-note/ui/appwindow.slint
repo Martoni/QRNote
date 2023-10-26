@@ -3,7 +3,7 @@ import { HorizontalBox, TextEdit } from "std-widgets.slint";
 
 export component AppWindow inherits Window {
     in-out property<image> qrnote: @image-url("icons/QRNote.png");
-    out property<string> thetext: "Pouet";
+    out property<string> thetext: "";
     callback text-is-edited();
     VerticalBox {
         TextEdit {
