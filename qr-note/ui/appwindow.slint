@@ -1,9 +1,10 @@
 import { Button, VerticalBox } from "std-widgets.slint";
-import { HorizontalBox, TextEdit } from "std-widgets.slint";
+import { HorizontalBox, TextEdit, LineEdit } from "std-widgets.slint";
 
 export component AppWindow inherits Window {
     in-out property<image> qrnote: @image-url("icons/QRNote.png");
     out property<string> thetext: "";
+    in property<string> errormsg: "Ok";
     callback text-is-edited();
     VerticalBox {
         TextEdit {
@@ -17,8 +18,14 @@ export component AppWindow inherits Window {
         }
         Image {
             source : qrnote;
-            width: 100px;
-            height: 100px;
+            width: 150px;
+            height: 150px;
+        }
+        LineEdit {
+            text: errormsg;
+            width: 300px;
+            read-only: true;
+            horizontal-alignment: center;
         }
     }
 }
