@@ -16,16 +16,16 @@ export component AppWindow inherits Window {
                 root.text-is-edited();
             }
         }
+        Image {
+            source : qrnote;
+            width: 150px;
+            height: 150px;
+        }
         LineEdit {
             text: errormsg;
             width: 300px;
             read-only: true;
             horizontal-alignment: center;
-        }
-        Image {
-            source : qrnote;
-            width: 100px;
-            height: 100px;
         }
     }
 }
