@@ -5,7 +5,9 @@ use slint::Rgb8Pixel;
 use slint::Image;
 slint::include_modules!();
 
-fn main() -> Result<(), slint::PlatformError> {
+#[cfg_attr(target_arch = "wasm32",
+           wasm_bindgen::prelude::wasm_bindgen(start))]
+pub fn main() -> Result<(), slint::PlatformError> {
     let ui = AppWindow::new()?;
 
     let ui_handle = ui.as_weak();
