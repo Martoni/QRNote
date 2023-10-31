@@ -21,7 +21,7 @@ pub fn main() -> Result<(), slint::PlatformError> {
                     image.width(),
                     image.height(),
                 );
-                ui.set_errormsg("Ok".into());
+                ui.set_errormsg("".into());
                 ui.set_qrnote(Image::from_rgb8(pixel_buffer));
             }
             Err(e) => ui.set_errormsg(e.to_string().into()),
