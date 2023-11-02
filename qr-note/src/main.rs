@@ -5,8 +5,6 @@ use slint::Rgb8Pixel;
 use slint::SharedPixelBuffer;
 slint::include_modules!();
 
-#[cfg_attr(target_arch = "wasm32",
-           wasm_bindgen::prelude::wasm_bindgen(start))]
 pub fn main() -> Result<(), slint::PlatformError> {
     let ui = AppWindow::new()?;
 
