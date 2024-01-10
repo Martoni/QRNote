@@ -29,8 +29,11 @@ pub fn main() -> Result<(), slint::PlatformError> {
                     image.width(),
                     image.height(),
                 );
+                let s = String::from(ui.get_thetext());
+                ui.set_charcount(s.chars().count().try_into().unwrap());
                 ui.set_errormsg("".into());
                 ui.set_qrnote(Image::from_rgb8(pixel_buffer));
+
             }
             Err(e) => ui.set_errormsg(e.to_string().into()),
         }

@@ -7,6 +7,7 @@ export component AppWindow inherits Window {
     in-out property<image> qrnote: @image-url("icons/QRNote.png");
     out property<string> thetext: "";
     in property<string> errormsg: "";
+    in property<int> charcount: 0;
     callback text-is-edited();
     VerticalBox {
         TextEdit {
@@ -17,6 +18,12 @@ export component AppWindow inherits Window {
                 thetext = text;
                 root.text-is-edited();
             }
+        }
+        LineEdit {
+            text: charcount;
+            preferred-width: 300px;
+            read-only: true;
+            horizontal-alignment: center;
         }
         Image {
             source : qrnote;
