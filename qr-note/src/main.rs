@@ -23,15 +23,21 @@ pub fn main() -> Result<(), slint::PlatformError> {
         let ui = ui_handle.unwrap();
         match QrCode::new(ui.get_thetext()) {
             Ok(code) => {
+                let s = String::from(ui.get_thetext());
+                let charcount = s.chars().count();
+                if charcount > 500 {
+                    ui.set_qr_size(500);
+                } else if charcount > 150 {
+                    ui.set_qr_size(300);
+                }
+                ui.set_charcount(charcount.try_into().unwrap());
+                ui.set_errormsg("".try_into().unwrap());
                 let image = code.render::<Rgb<u8>>().build();
                 let pixel_buffer = SharedPixelBuffer::<Rgb8Pixel>::clone_from_slice(
                     image.as_raw(),
                     image.width(),
                     image.height(),
                 );
-                let s = String::from(ui.get_thetext());
-                ui.set_charcount(s.chars().count().try_into().unwrap());
-                ui.set_errormsg("".into());
                 ui.set_qrnote(Image::from_rgb8(pixel_buffer));
 
             }

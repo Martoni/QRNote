@@ -8,6 +8,7 @@ export component AppWindow inherits Window {
     out property<string> thetext: "";
     in property<string> errormsg: "";
     in property<int> charcount: 0;
+    in property<int> qr_size: 150;
     callback text-is-edited();
     VerticalBox {
         TextEdit {
@@ -27,8 +28,8 @@ export component AppWindow inherits Window {
         }
         Image {
             source : qrnote;
-            preferred-width: 150px;
-            preferred-height: 150px;
+            preferred-width: qr_size*1px;
+            preferred-height:qr_size*1px;
         }
         LineEdit {
             text: errormsg;
